@@ -15,7 +15,7 @@ qemu-arm info $arg
 
 # Check if the compilation was successful
 if [ "$?" -eq 0 ]; then
-  echo "Compilation successful. Executable created."
+  echo "\e[32mCompilation successful. Executable created.\e[0m"
 else
-  echo "Compilation failed."
+  echo "\e[31mCompilation failed.\e[:e0m"
 fi

@@ -14,7 +14,7 @@ qemu-riscv64 info $arg
 
 # Check if the compilation was successful
 if [ "$?" -eq 0 ]; then
-  echo "Compilation successful. Executable created: ../src/info"
+  echo "\[e32mCompilation successful. Executable created.\e[0m"
 else
-  echo "Compilation failed."
+  echo "\e[31mCompilation failed.\e[m"
 fi
