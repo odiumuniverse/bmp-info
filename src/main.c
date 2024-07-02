@@ -8,28 +8,28 @@
 #pragma pack(1)
 
 typedef struct {
-  u16_t bfType;
-  u32_t bfSize;
-  u16_t bfReserved1;
-  u16_t bfReserved2;
-  u32_t bfOffBits;
+  u16_t bf_type;
+  u32_t bf_size;
+  u16_t bf_reserved1;
+  u16_t bf_reserved2;
+  u32_t bf_offbits;
 } BITMAPFILEHEADER;
 
 typedef struct {
-  u32_t biSize;
-  i32_t biWidth;
-  i32_t biHeight;
-  u16_t biPlanes;
-  u16_t biBitCount;
-  u32_t biCompression;
-  u32_t biSizeImage;
-  i32_t biXPelsPerMeter;
-  i32_t biYPelsPerMeter;
-  u32_t biClrUsed;
-  u32_t biClrImportant;
+  u32_t bi_size;
+  i32_t bi_width;
+  i32_t bi_height;
+  u16_t bi_planes;
+  u16_t bi_bit_count;
+  u32_t bi_compression;
+  u32_t bi_size_image;
+  i32_t bi_Xpels_permeter;
+  i32_t bi_Ypels_permeter;
+  u32_t bi_clr_used;
+  u32_t bi_clr_important;
 } BITMAPINFOHEADER;
 
-char *getCompressionMethod(u32_t compression) {
+char *get_compression_method(u32_t compression) {
   switch (compression) {
   case 0:
     return "none";
@@ -60,7 +60,7 @@ void print_info_bmpfile(char *filename) {
   BITMAPFILEHEADER first_header;
   fread(&first_header, sizeof(BITMAPFILEHEADER), 1, file);
 
-  if (first_header.bfType != 0x4D42 && first_header.bfType != 0x424D) {
+  if (first_header.bf_type != 0x4D42 && first_header.bf_type != 0x424D) {
     fprintf(stderr, "It's not a BMP file\n");
     fclose(file);
     return;
@@ -69,17 +69,17 @@ void print_info_bmpfile(char *filename) {
   BITMAPINFOHEADER info_header;
   fread(&info_header, sizeof(BITMAPINFOHEADER), 1, file);
 
-  printf("Width         : %dpx\n", info_header.biWidth);
-  printf("Height        : %dpx\n", info_header.biHeight);
-  printf("Bits/pixel    : %d\n", info_header.biBitCount);
+  printf("Width         : %dpx\n", info_header.bi_width);
+  printf("Height        : %dpx\n", info_header.bi_height);
+  printf("Bits/pixel    : %d\n", info_header.bi_bit_count);
   printf("Compression   : %s\n",
-         getCompressionMethod(info_header.biCompression));
-  printf("Image Size    : %u byte\n", info_header.biSizeImage);
-  printf("Pixels/meter  : %dx%d\n", info_header.biXPelsPerMeter,
-         info_header.biYPelsPerMeter);
-  printf("Colors Used   : %u\n", info_header.biClrUsed);
+         get_compression_method(info_header.bi_compression));
+  printf("Image Size    : %u byte\n", info_header.bi_size_image);
+  printf("Pixels/meter  : %dx%d\n", info_header.bi_Xpels_permeter,
+         info_header.bi_Ypels_permeter);
+  printf("Colors Used   : %u\n", info_header.bi_clr_used);
   printf("Important Colors : %u\n",
-         info_header.biClrImportant); // Always zero, idk
+         info_header.bi_clr_important); // Always zero, idk
 
   fclose(file);
 }
