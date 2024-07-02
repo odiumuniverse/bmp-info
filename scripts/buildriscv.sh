@@ -9,7 +9,7 @@ fi
 arg=$1
 
 # Compile the main.c file
-riscv64-linux-gnu-gcc -static src/main.c -o info
+riscv64-linux-gnu-gcc -static src/bmp.c -o info
 qemu-riscv64 info $arg
 
 # Check if the compilation was successful

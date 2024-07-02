@@ -9,7 +9,7 @@ fi
 arg=$1
 
 # Compile the main.c file
-arm-linux-gnueabi-gcc -static src/main.c -o info
+arm-linux-gnueabi-gcc -static src/bmp.c -o info
 
 qemu-arm info $arg
 
